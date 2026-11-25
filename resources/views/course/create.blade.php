@@ -1,31 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create Course</title>
-</head>
-<body>
-
+<x-layouts.app title="Create Course">
     <h1>Create Course</h1>
-
-    @if($errors->any())
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
-
-    <form action="/courses" method="POST">
+    <form action="{{ route('courses.store') }}" method="POST">
         @csrf
-
-        @include('course.form')
-
-        <button type="submit">Save Course</button>
+        <x-courses.form :course="new \App\Models\Course(['is_active' => true])" />
+        <button type="submit" class="btn">Create Course</button>
+        <a href="{{ route('courses.index') }}">Cancel</a>
     </form>
-
-    <br>
-
-    <a href="/courses">Back to Courses</a>
-
-</body>
-</html>
+</x-layouts.app>
